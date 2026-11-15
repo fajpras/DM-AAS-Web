@@ -1,90 +1,176 @@
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
+<html lang="id" class="scroll-smooth dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portofolio | Fajri Nur Prasetyo</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #020617; /* Slate 950 */
+    <title>Portofolio | Faleft</title>
+    <script>
+        if (localStorage.getItem('theme') === 'light') {
+            document.documentElement.classList.remove('dark');
+        } else {
+            document.documentElement.classList.add('dark');
         }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                },
+            },
+        };
+    </script>
+    <style>
         .glass-card {
-            background: rgba(30, 41, 59, 0.4);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(51, 65, 85, 0.4);
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(203, 213, 225, 0.8);
+        }
+        .dark .glass-card {
+            background: rgba(15, 23, 42, 0.55);
+            border: 1px solid rgba(51, 65, 85, 0.45);
         }
         .text-gradient {
-            background: linear-gradient(to right, #60a5fa, #1d4ed8);
+            background: linear-gradient(135deg, #0f172a 0%, #2563eb 55%, #1d4ed8 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+        .dark .text-gradient {
+            background: linear-gradient(135deg, #f8fafc 0%, #93c5fd 45%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .bg-grid {
+            background-image: radial-gradient(rgba(100, 116, 139, 0.16) 1px, transparent 1px);
+            background-size: 28px 28px;
+        }
+        .dark .bg-grid {
+            background-image: radial-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+        }
     </style>
 </head>
-<body class="text-slate-200 font-sans">
+<body class="bg-slate-50 dark:bg-[#020617] text-slate-800 dark:text-slate-200 font-sans antialiased selection:bg-blue-500/30 selection:text-blue-700 dark:selection:text-blue-200 relative overflow-x-hidden transition-colors duration-300">
 
-    <header class="fixed w-full z-50 glass-card">
+    <!-- Ambient Background Glow & Subtle Grid -->
+    <div class="fixed inset-0 -z-10 pointer-events-none bg-grid">
+        <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[620px] h-[420px] bg-blue-400/20 dark:bg-blue-600/15 rounded-full blur-[120px]"></div>
+        <div class="absolute bottom-0 right-0 w-[400px] h-[300px] bg-indigo-400/15 dark:bg-indigo-600/10 rounded-full blur-[120px]"></div>
+    </div>
+
+    <header class="fixed top-0 w-full z-50 glass-card border-x-0 border-t-0">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-xl font-bold tracking-wider text-blue-400 italic">FAA</div>
-            <div class="hidden md:flex space-x-8 text-sm uppercase tracking-widest font-medium">
-                <a href="#home" class="hover:text-blue-400 transition">Beranda</a>
-                <a href="#education" class="hover:text-blue-400 transition">Pendidikan</a>
-                <a href="#projects" class="hover:text-blue-400 transition">Proyek</a>
-                <a href="#skills" class="hover:text-blue-400 transition">Keahlian</a>
+            <a href="#home" class="text-xl font-extrabold tracking-wider text-blue-600 dark:text-blue-400 italic hover:text-blue-500 dark:hover:text-blue-300 transition">FALEFT<span class="text-slate-500 dark:text-slate-400 not-italic">.</span></a>
+
+            <div class="hidden md:flex items-center space-x-8 text-xs uppercase tracking-widest font-semibold text-slate-600 dark:text-slate-300">
+                <a href="#home" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Beranda</a>
+                <a href="#skills" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Keahlian</a>
+                <a href="#education" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Pendidikan</a>
+                <a href="#projects" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Proyek</a>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <button id="theme-toggle" type="button" aria-label="Ganti Mode Tema" title="Ganti Mode Tema" class="w-9 h-9 rounded-xl glass-card flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-500/50 transition">
+                    <i id="theme-icon" class="fas fa-sun text-sm"></i>
+                </button>
+                <button id="menu-toggle" type="button" aria-label="Toggle Menu" class="md:hidden text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none p-1">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
             </div>
         </nav>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800/80 px-6 py-4 space-y-3 text-xs uppercase tracking-widest font-semibold text-slate-600 dark:text-slate-300 bg-white/95 dark:bg-slate-950/90">
+            <a href="#home" class="block py-1 hover:text-blue-600 dark:hover:text-blue-400 transition">Beranda</a>
+            <a href="#skills" class="block py-1 hover:text-blue-600 dark:hover:text-blue-400 transition">Keahlian</a>
+            <a href="#education" class="block py-1 hover:text-blue-600 dark:hover:text-blue-400 transition">Pendidikan</a>
+            <a href="#projects" class="block py-1 hover:text-blue-600 dark:hover:text-blue-400 transition">Proyek</a>
+        </div>
     </header>
 
-    <section id="home" class="pt-40 pb-20 px-6 container mx-auto flex flex-col items-center text-center">
-        <div class="w-44 h-44 rounded-full border-4 border-blue-500/20 p-1.5 mb-8 shadow-[0_0_30px_rgba(30,58,138,0.5)]">
-            <div class="w-full h-full rounded-full bg-slate-800 flex items-center justify-center overflow-hidden">
-                <img src="asset/WhatsApp Image 2026-04-28 at 11.00.26.jpeg" alt="Foto Profil" class="w-full h-full object-cover">
+    <section id="home" class="pt-36 pb-24 px-6 container mx-auto flex flex-col items-center text-center scroll-mt-24">
+        <div class="relative mb-8">
+            <div class="absolute inset-0 rounded-full bg-blue-500/20 blur-xl"></div>
+            <div class="relative w-40 h-40 md:w-44 md:h-44 rounded-full border-2 border-blue-500/30 dark:border-blue-400/30 p-1.5 shadow-[0_0_35px_rgba(37,99,235,0.25)] dark:shadow-[0_0_35px_rgba(37,99,235,0.35)] bg-white/80 dark:bg-slate-900/60">
+                <div class="w-full h-full rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center overflow-hidden">
+                    <img src="asset/WhatsApp Image 2026-04-28 at 11.00.26.jpeg" alt="Foto Profil Faleft" class="w-full h-full object-cover">
+                </div>
             </div>
         </div>
 
-        <h1 class="text-5xl md:text-7xl font-black mb-4 text-gradient uppercase tracking-tighter">
-            Fajri Nur Prasetyo
+        <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-700 dark:text-blue-300 text-xs font-semibold tracking-wide mb-5">
+            <span class="w-2 h-2 rounded-full bg-blue-500 dark:bg-blue-400 animate-pulse"></span>
+            Terbuka untuk Kolaborasi
+        </span>
+
+        <h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold mb-4 text-gradient uppercase tracking-tight">
+            Faleft
         </h1>
-        <p class="text-blue-500 font-bold tracking-[0.3em] uppercase text-xs md:text-sm mb-8">
-            Informatics Student | software engineering technology
+        <p class="text-blue-600 dark:text-blue-400 font-semibold tracking-[0.2em] uppercase text-xs md:text-sm mb-6">
+            Informatics Student &bull; Software Engineering Technology
         </p>
-        
-        <p class="max-w-3xl text-slate-400 text-lg md:text-xl leading-relaxed mb-10">
-            Berfokus pada pengembangan aplikasi web modern menggunakan <strong>Laravel</strong> dan <strong>Next.js</strong>. 
+
+        <p class="max-w-2xl text-slate-600 dark:text-slate-400 text-base md:text-lg leading-relaxed mb-10">
+            Berfokus pada pengembangan aplikasi web modern menggunakan <strong class="text-slate-900 dark:text-slate-200 font-semibold">Laravel</strong> dan <strong class="text-slate-900 dark:text-slate-200 font-semibold">Next.js</strong>. 
             Berpengalaman dalam perancangan sistem menggunakan UML dan optimasi performa web.
         </p>
 
-        <div class="flex space-x-6 text-2xl">
-            <a href="https://github.com/fajpras" class="text-slate-400 hover:text-blue-500 transition-all transform hover:scale-110"><i class="fab fa-github"></i></a>
-            <a href="https://www.linkedin.com/in/fajri-nur-prasetyo-7b29a8406?utm_source=share_via&utm_content=profile&utm_medium=member_android" class="text-slate-400 hover:text-blue-500 transition-all transform hover:scale-110"><i class="fab fa-linkedin"></i></a>
-            <a href="https://www.instagram.com/im_paas" class="text-slate-400 hover:text-blue-500 transition-all transform hover:scale-110"><i class="fab fa-instagram"></i></a>
-            <a href="mailto:faleftplays@gmail.com" class="text-slate-400 hover:text-blue-500 transition-all transform hover:scale-110"><i class="far fa-envelope"></i></a>
+        <div class="flex flex-wrap items-center justify-center gap-4 mb-10">
+            <a href="#projects" class="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold tracking-wide transition shadow-lg shadow-blue-600/25">
+                Lihat Proyek
+            </a>
+            <a href="mailto:faleftplays@gmail.com" class="px-6 py-3 rounded-xl glass-card hover:border-blue-500/50 text-slate-700 dark:text-slate-200 text-sm font-semibold tracking-wide transition">
+                Hubungi Saya
+            </a>
+        </div>
+
+        <div class="flex items-center space-x-6 text-xl">
+            <a href="https://github.com/fajpras" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-all transform hover:-translate-y-0.5"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/fajri-nur-prasetyo-7b29a8406?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-all transform hover:-translate-y-0.5"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.instagram.com/im_paas" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-all transform hover:-translate-y-0.5"><i class="fab fa-instagram"></i></a>
+            <a href="mailto:faleftplays@gmail.com" aria-label="Email" class="text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-all transform hover:-translate-y-0.5"><i class="far fa-envelope"></i></a>
         </div>
     </section>
 
-    <section id="skills" class="py-24 bg-slate-900/30">
+    <section id="skills" class="py-24 bg-slate-100/70 dark:bg-slate-900/30 border-y border-slate-200 dark:border-slate-800/50 scroll-mt-20">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold mb-16 text-center tracking-widest text-white">KEAHLIAN UTAMA</h2>
-            
-            <div class="flex flex-wrap justify-center gap-8">
-                
-                <div class="glass-card p-8 rounded-2xl text-center group hover:border-blue-600 transition-all w-full sm:w-64">
-                    <i class="fab fa-laravel text-5xl text-blue-600 mb-6 group-hover:scale-110 transition-transform"></i>
-                    <h3 class="font-bold text-white tracking-wide">Laravel</h3>
-                    <p class="text-xs text-slate-500 mt-2">Backend Development</p>
+            <div class="text-center mb-14">
+                <p class="text-blue-600 dark:text-blue-400 text-xs font-bold uppercase tracking-[0.25em] mb-2">Teknologi &amp; Kemampuan</p>
+                <h2 class="text-3xl font-extrabold tracking-wide text-slate-900 dark:text-white">KEAHLIAN UTAMA</h2>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
+
+                <div class="glass-card p-8 rounded-2xl text-center group hover:border-blue-500/60 hover:-translate-y-1 transition-all duration-300">
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i class="fab fa-laravel text-3xl text-blue-600 dark:text-blue-400"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-900 dark:text-white tracking-wide">Laravel</h3>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-2">Backend Development</p>
                 </div>
 
-                <div class="glass-card p-8 rounded-2xl text-center group hover:border-blue-600 transition-all w-full sm:w-64">
-                    <i class="fab fa-react text-5xl text-blue-600 mb-6 group-hover:scale-110 transition-transform"></i>
-                    <h3 class="font-bold text-white tracking-wide">Next.js</h3>
-                    <p class="text-xs text-slate-500 mt-2">Frontend Interfaces</p>
+                <div class="glass-card p-8 rounded-2xl text-center group hover:border-blue-500/60 hover:-translate-y-1 transition-all duration-300">
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i class="fab fa-react text-3xl text-blue-600 dark:text-blue-400"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-900 dark:text-white tracking-wide">Next.js</h3>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-2">Frontend Interfaces</p>
                 </div>
 
-                <div class="glass-card p-8 rounded-2xl text-center group hover:border-blue-600 transition-all w-full sm:w-64">
-                    <i class="fas fa-sitemap text-5xl text-blue-600 mb-6 group-hover:scale-110 transition-transform"></i>
-                    <h3 class="font-bold text-white tracking-wide">System Design</h3>
-                    <p class="text-xs text-slate-500 mt-2">UML & Database Modeling</p>
+                <div class="glass-card p-8 rounded-2xl text-center group hover:border-blue-500/60 hover:-translate-y-1 transition-all duration-300 sm:col-span-2 lg:col-span-1">
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i class="fas fa-sitemap text-3xl text-blue-600 dark:text-blue-400"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-900 dark:text-white tracking-wide">System Design</h3>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-2">UML &amp; Database Modeling</p>
                 </div>
 
             </div>
@@ -92,68 +178,106 @@
     </section>
 
     <section class="py-24 container mx-auto px-6 grid lg:grid-cols-2 gap-16">
-        
-        <div id="education">
-            <h2 class="text-2xl font-black mb-10 flex items-center gap-4">
-                <span class="w-10 h-1 bg-blue-600"></span>
+
+        <div id="education" class="scroll-mt-24">
+            <h2 class="text-2xl font-extrabold mb-10 flex items-center gap-4 text-slate-900 dark:text-white">
+                <span class="w-10 h-1 bg-blue-600 dark:bg-blue-500 rounded-full"></span>
                 RIWAYAT PENDIDIKAN
             </h2>
-            <div class="border-l-2 border-slate-800 ml-3 space-y-12">
-                <div class="relative pl-10">
-                    <span class="absolute -left-[9px] top-0 w-4 h-4 bg-blue-600 rounded-full shadow-[0_0_10px_#2563eb]"></span>
-                    <h3 class="text-xl font-bold text-white">D4 Teknologi Rekayasa Perangkat Lunak</h3>
-                    <p class="text-blue-500 text-sm font-semibold mb-3">Politeknik Negeri Batam • 2025 — Sekarang</p>
-                    <p class="text-slate-400 leading-relaxed text-sm">
+            <div class="border-l-2 border-slate-200 dark:border-slate-800 ml-2 space-y-10">
+                <div class="relative pl-8">
+                    <span class="absolute -left-[9px] top-1.5 w-4 h-4 bg-blue-600 dark:bg-blue-500 rounded-full ring-4 ring-blue-500/20 shadow-[0_0_12px_#3b82f6]"></span>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white">D4 Teknologi Rekayasa Perangkat Lunak</h3>
+                    <p class="text-blue-600 dark:text-blue-400 text-sm font-semibold mt-1 mb-3">Politeknik Negeri Batam &bull; 2025 &mdash; Sekarang</p>
+                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed text-sm">
                         Fokus pada rekayasa perangkat lunak dan manajemen basis data. Aktif dalam pengerjaan proyek berbasis tim (PBL).
                     </p>
                 </div>
-                <div class="relative pl-10">
-                    <span class="absolute -left-[9px] top-0 w-4 h-4 bg-slate-700 rounded-full"></span>
-                    <h3 class="text-xl font-bold text-slate-300">Sekolah Menengah Kejuruan</h3>
-                    <p class="text-slate-500 text-sm font-semibold mb-3">SMK Negeri 3 Batam • 2022 — 2025</p>
-                    <p class="text-slate-500 leading-relaxed text-sm italic">
+                <div class="relative pl-8">
+                    <span class="absolute -left-[9px] top-1.5 w-4 h-4 bg-slate-300 dark:bg-slate-700 rounded-full ring-4 ring-slate-200 dark:ring-slate-800"></span>
+                    <h3 class="text-xl font-bold text-slate-800 dark:text-slate-200">Sekolah Menengah Kejuruan</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm font-semibold mt-1 mb-3">SMK Negeri 3 Batam &bull; 2022 &mdash; 2025</p>
+                    <p class="text-slate-600 dark:text-slate-400 leading-relaxed text-sm italic">
                         Lulus dengan fokus pada Teknologi Informasi dan Komunikasi.
                     </p>
                 </div>
             </div>
         </div>
 
-        <div id="projects">
-            <h2 class="text-2xl font-black mb-10 flex items-center gap-4">
-                <span class="w-10 h-1 bg-blue-600"></span>
+        <div id="projects" class="scroll-mt-24">
+            <h2 class="text-2xl font-extrabold mb-10 flex items-center gap-4 text-slate-900 dark:text-white">
+                <span class="w-10 h-1 bg-blue-600 dark:bg-blue-500 rounded-full"></span>
                 PROYEK PILIHAN
             </h2>
             <div class="space-y-6">
-                <div class="glass-card p-6 rounded-2xl group hover:bg-slate-800/40 transition-all border-l-4 border-l-blue-600">
-                    <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-lg font-bold text-white tracking-tight">Sistem Pengajuan Dokumen Warga Digital</h3>
-                        <span class="text-[10px] px-2 py-1 bg-blue-600/20 text-blue-400 rounded">PBL PROJECT</span>
+                <div class="glass-card p-6 rounded-2xl group hover:bg-white/90 dark:hover:bg-slate-800/50 hover:border-blue-500/40 transition-all border-l-4 border-l-blue-600 dark:border-l-blue-500">
+                    <div class="flex flex-wrap justify-between items-start gap-2 mb-3">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white tracking-tight group-hover:text-blue-600 dark:group-hover:text-blue-300 transition">Sistem Pengajuan Dokumen Warga Digital</h3>
+                        <span class="text-[10px] font-bold tracking-wider px-2.5 py-1 bg-blue-500/15 text-blue-700 dark:text-blue-300 border border-blue-500/20 rounded-full shrink-0">PBL PROJECT</span>
                     </div>
-                    <p class="text-slate-400 text-sm mb-6">
-                        Aplikasi berbasis web untuk mengelola pengajuan dokumen administrasi warga secara digital dan dapat mencetak surat dalam format PDF menggunakan PHP dan MySQL
+                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-5">
+                        Aplikasi berbasis web untuk mengelola pengajuan dokumen administrasi warga secara digital dan dapat mencetak surat dalam format PDF menggunakan PHP dan MySQL.
                     </p>
-                    <div class="flex gap-4">
-                        <span class="text-xs text-slate-500"><i class="fab fa-php mr-1"></i> PHP</span>
-                        <span class="text-xs text-slate-500"><i class="fab fa-bootstrap mr-1"></i> Bootstrap</span>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 text-xs text-slate-700 dark:text-slate-300">
+                            <i class="fab fa-php text-blue-600 dark:text-blue-400"></i> PHP
+                        </span>
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 text-xs text-slate-700 dark:text-slate-300">
+                            <i class="fab fa-bootstrap text-blue-600 dark:text-blue-400"></i> Bootstrap
+                        </span>
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 text-xs text-slate-700 dark:text-slate-300">
+                            <i class="fas fa-database text-blue-600 dark:text-blue-400"></i> MySQL
+                        </span>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <footer class="bg-slate-950/80 border-t border-slate-900 py-16">
+    <footer class="bg-slate-100/90 dark:bg-slate-950/90 border-t border-slate-200 dark:border-slate-800/70 py-14">
         <div class="container mx-auto px-6 text-center">
-            <h2 class="text-gradient font-bold text-xl mb-4 italic">MARI TERHUBUNG</h2>
-            <p class="text-slate-500 text-sm mb-10 max-w-sm mx-auto uppercase tracking-widest">
+            <h2 class="text-gradient font-extrabold text-xl mb-3 italic tracking-wide">MARI TERHUBUNG</h2>
+            <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm mb-8 max-w-md mx-auto tracking-wider">
                 Terbuka untuk kolaborasi proyek pengembangan web dan diskusi teknologi.
             </p>
-            <div class="h-px w-20 bg-blue-900 mx-auto mb-10"></div>
-            <p class="text-slate-700 text-[10px] tracking-[0.4em] uppercase">
-                &copy; 2026 Developed by <span class="text-slate-500 italic">Fajri Nur Prasetyo</span>
+            <div class="h-px w-20 bg-blue-500/40 mx-auto mb-8"></div>
+            <p class="text-slate-500 text-[11px] tracking-[0.25em] uppercase">
+                &copy; 2026 Developed by <span class="text-slate-800 dark:text-slate-300 font-semibold italic">Faleft</span>
             </p>
         </div>
     </footer>
+
+    <script>
+        const htmlEl = document.documentElement;
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        function updateThemeIcon() {
+            const isDark = htmlEl.classList.contains('dark');
+            themeIcon.className = isDark ? 'fas fa-sun text-sm' : 'fas fa-moon text-sm';
+        }
+
+        updateThemeIcon();
+
+        themeToggle.addEventListener('click', () => {
+            htmlEl.classList.toggle('dark');
+            const isDark = htmlEl.classList.contains('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            updateThemeIcon();
+        });
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
 
 </body>
 </html>
